@@ -4,6 +4,7 @@
  *  Created on: 11 feb 2020
  *      Author: lorec
  */
+
 #include <string>
 #include <vector>
 #include <fstream>
@@ -22,6 +23,18 @@ Conto::Conto(string p, string nc, int id) {
 	this->balance = 0;
 
 }
+
+Conto::Conto(const Conto& copy)
+{
+	this->user = copy.user;
+	this->accountName = copy.accountName;
+	this->id = copy.id;
+	this->transCounter = copy.transCounter;
+	this->balance = copy.balance;
+	this->transactions = copy.transactions;
+}
+
+Conto::Conto(){}
 
 Conto::~Conto() {
 	// TODO Auto-generated destructor stub
@@ -59,20 +72,42 @@ void Conto::incrementCounter(){
 	this->transCounter=this->transCounter+1;
 }
 
-
-
-
 void Conto::saveOnFile(string dir)
 {
-	string s = to_string(this->id);
+	Conto a(*this);
+	// save data to archive
+	string s = to_string(a.id);
 	string filedir = dir + "\\" + s;
 	_mkdir(filedir.c_str());
 	string filename = filedir + "\\" + s;
 
-	std::ofstream file (filename);
+	std::ofstream ofs(filename);
+	{
+		boost::archive::text_oarchive oa(ofs);
+		// write class instance to archive
+		oa << a;
+		// archive and stream closed when destructors are called
+	}
+}
 
-	boost::archive::text_oarchive arc(file);
-	arc << this;
+
+
+
+Conto Conto::readFromFile(string dir, int id)
+{
+	string s = to_string(id);
+	string filedir = dir + "\\" + s;
+	string filename = filedir + "\\" + s;
+	Conto newg;
+	{
+		// create and open an archive for input
+		std::ifstream ifs(filename);
+		boost::archive::text_iarchive ia(ifs);
+		// read class state from archive
+		ia >> newg;
+		// archive and stream closed when destructors are called
+	}
+	return  newg;
 }
 
 void Conto::insertTransaction(string type, float import, int day, int month, int year, Conto* account2, bool receiver){

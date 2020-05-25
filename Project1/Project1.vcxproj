@@ -24,6 +24,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Conto.cpp" />
+    <ClCompile Include="esempio1.cpp" />
+    <ClCompile Include="secondStart.cpp" />
     <ClCompile Include="startProject.cpp" />
     <ClCompile Include="Transaction.cpp" />
   </ItemGroup>
@@ -104,6 +106,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\boost_1_73_0\stage\lib</AdditionalLibraryDirectories>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt);</OutputFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

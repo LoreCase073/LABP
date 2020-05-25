@@ -5,5 +5,5 @@
 int main(int argc, char **argv){
 	::testing::InitGoogleTest(&argc, argv);
 
-	 return RUNALLTESTS();
+	 return RUN_ALL_TESTS();
 }
