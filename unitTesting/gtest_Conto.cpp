@@ -1,13 +1,12 @@
 #include "gtest/gtest.h"
 #include <string>
-#include "Conto.h"
-
+#include "../Project1/Conto.h"
 
 TEST(Conto, ConstructAndCounter) {
+    Conto c;
     string name = "Lorenzo";
     string account = "Principale";
     int id = 1;
-    Conto c = Conto(name, account, 1);
     ASSERT_EQ(0, c.getBalance());
     ASSERT_EQ(1, c.getId());
     ASSERT_EQ(1, c.getTransCounter());

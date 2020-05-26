@@ -10,8 +10,7 @@
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/serialization/vector.hpp>
 #include "Transaction.h"
-#ifndef CONTO_H_
-#define CONTO_H_
+
 using namespace std;
 
 class Conto {
@@ -56,8 +55,12 @@ public:
 
 	//tipo transazione: gain, transfer or expense
 	//poi importo, giorno, mese, anno, secondo conto se transfer, se ricevente oppure no
-	void insertTransaction(string type, float import, int day, int month, int year, Conto* account2=NULL, bool receiver=false);
+	void insertTransfer(float import, int day, int month, int year, Conto* account2=NULL);
 	//TODO cancellare trans e modificare
+
+	void insertGain(float import, int day, int month, int year);
+
+	void insertExpense(float import, int day, int month, int year);
 
 };
 

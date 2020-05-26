@@ -18,6 +18,8 @@ private:
 	float import;
 	string account;
 	string account2; //entra in gioco quando si ha un trasferimento da un conto ad un altro
+	int tid2;
+	int aid2;
 	bool receiver;
 	int aid;
 	int tid;
@@ -32,17 +34,20 @@ private:
 		ar & import;
 		ar & account;
 		ar & account2;
+		ar& aid2;
+		ar& tid2;
 		ar & receiver;
 		ar& aid;
 		ar& tid;
 		ar& day;
 		ar& month;
 		ar& year;
+
 	}
 
 
 public:
-	Transaction(string t, float i, string a, int id, int tid, int d, int m, int y, string a2="", bool receiver=false);
+	Transaction(string t, float i, string a, int id, int tid, int d, int m, int y, string a2 = "", int aid2 = 0, int tid2 = 0 , bool receiver = false);
 	Transaction();
 	virtual ~Transaction();
 

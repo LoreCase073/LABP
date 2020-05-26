@@ -19,10 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AccountManager.h" />
     <ClInclude Include="Conto.h" />
     <ClInclude Include="Transaction.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AccountManager.cpp" />
     <ClCompile Include="Conto.cpp" />
     <ClCompile Include="esempio1.cpp" />
     <ClCompile Include="secondStart.cpp" />
@@ -131,10 +133,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\boost_1_73_0</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\boost_1_73_0\stage\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

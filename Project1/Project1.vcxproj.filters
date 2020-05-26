@@ -21,6 +21,9 @@
     <ClInclude Include="Transaction.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="AccountManager.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Conto.cpp">
@@ -37,6 +40,9 @@
     </ClCompile>
     <ClCompile Include="esempio1.cpp">
       <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="AccountManager.cpp">
+      <Filter>File di risorse</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

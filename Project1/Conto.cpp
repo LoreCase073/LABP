@@ -110,34 +110,50 @@ Conto Conto::readFromFile(string dir, int id)
 	return  newg;
 }
 
-void Conto::insertTransaction(string type, float import, int day, int month, int year, Conto* account2, bool receiver){
-	if(type == "transfer" && account2 == NULL) //we can't transfer without a destination
+void Conto::insertTransfer(float import, int day, int month, int year, Conto* account2){
+	if(account2 == NULL) //we can't transfer without a destination
 	{
 		cout<<"Error! You have to select an account to transfer to!"<<endl;
-	}else{
-		Transaction t;
-		if(type == "transfer" && account2 != NULL){ //this is where i make a transfer trans
-			if(receiver==false){ //if sender of transaction, call the function also for the other account
-				t = Transaction(type, import, this->accountName, this->id, this->getTransCounter(), day, month, year, account2->getAccountName());
-				this->balance = this->balance - import;
-				account2->insertTransaction(type, import, day, month, year, this, true);
-				incrementCounter();
-			}else{ //if receiver, just insert the transaction and gain
-				t = Transaction(type, import, this->accountName, account2->getId(), account2->getTransCounter(), day, month, year, account2->getAccountName(),true);
-				this->balance = this->balance + import;
-			}
-		}else if(type!="transfer"){ //if not transfer is ok to create the transaction
-			t = Transaction(type, import, this->accountName, this->id, this->getTransCounter() , day, month, year);
-			if(type == "gain"){
-				this->balance = this->balance + import;
-			}
-			else{
-				this->balance = this->balance - import;
-			}
-			incrementCounter();
-		}
-		this->transactions.push_back(t);
 	}
-	//TODO devo fare il meccanismo per inserire la transazione nel file?
+	else {
+		Transaction t;
 
+		t = Transaction("transfer", import, this->accountName, this->id, this->getTransCounter(), day, month, year, account2->getAccountName(), account2->getId(), account2->getTransCounter(), false);
+		this->transactions.push_back(t);
+		this->balance = this->balance - import;
+
+		Transaction t2 = Transaction("transfer", import, account2->accountName, account2->getId(), account2->getTransCounter(), day, month, year, this->getAccountName(), this->getId(), this->getTransCounter(), true);
+
+		account2->transactions.push_back(t2);
+		account2->balance = account2->balance + import;
+
+		this->incrementCounter();
+		account2->incrementCounter();
+			
+			
+		
+	}
+
+}
+
+void Conto::insertGain(float import, int day, int month, int year)
+{
+	Transaction t = Transaction("gain", import, this->accountName, this->id, this->getTransCounter(), day, month, year);
+	
+	this->balance = this->balance + import;
+	
+	this->incrementCounter();
+
+	this->transactions.push_back(t);
+}
+
+void Conto::insertExpense(float import, int day, int month, int year)
+{
+	Transaction t = Transaction("expense", import, this->accountName, this->id, this->getTransCounter(), day, month, year);
+
+	this->balance = this->balance - import;
+
+	this->incrementCounter();
+
+	this->transactions.push_back(t);
 }

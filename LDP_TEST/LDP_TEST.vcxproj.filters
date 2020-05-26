@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="test.cpp" />
+    <ClCompile Include="..\Project1\Conto.cpp">
+      <Filter>tested</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Project1\startProject.cpp">
+      <Filter>tested</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Project1\secondStart.cpp">
+      <Filter>tested</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Project1\Transaction.cpp">
+      <Filter>tested</Filter>
+    </ClCompile>
+    <ClCompile Include="main_test.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="tested">
+      <UniqueIdentifier>{133760db-eb97-478e-8796-f533a98fbba4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Project1\Conto.h">
+      <Filter>tested</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Project1\Transaction.h">
+      <Filter>tested</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

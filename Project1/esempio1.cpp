@@ -39,8 +39,8 @@ public:
 int main() {
     string dir = "C:\\Users\\lorec\\source\\repos\\Project1\\Project1";
     Conto conto1 = Conto("Lorenzo", "Principale", 1);
-    conto1.insertTransaction("gain", 5700, 25, 05, 2020);
-    conto1.insertTransaction("expense", 2700, 25, 05, 2020);
+    conto1.insertGain(5700, 25, 05, 2020);
+    conto1.insertExpense(2700, 25, 05, 2020);
     conto1.saveOnFile(dir);
     
     Conto conto2;

@@ -9,7 +9,7 @@
 #include "Transaction.h"
 using namespace std;
 
-Transaction::Transaction(string t, float i, string a, int id, int tid, int d, int m, int y, string a2, bool receiver) {
+Transaction::Transaction(string t, float i, string a, int id, int tid, int d, int m, int y, string a2, int aid2, int tid2, bool receiver) {
 	this->opType=t;
 	this->import=i;
 	this->account =a;
@@ -20,6 +20,8 @@ Transaction::Transaction(string t, float i, string a, int id, int tid, int d, in
 	this->year=y;
 	this->account2=a2;
 	this->receiver = receiver;
+	this->aid2 = aid2;
+	this->tid2 = tid2;
 
 }
 Transaction::Transaction(){
