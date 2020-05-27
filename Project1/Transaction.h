@@ -49,6 +49,35 @@ private:
 public:
 	Transaction(string t, float i, string a, int id, int tid, int d, int m, int y, string a2 = "", int aid2 = 0, int tid2 = 0 , bool receiver = false);
 	Transaction();
+	
+	string getType();
+
+	float getImport();
+
+	void setImport(float i);
+
+	string getAccount2();
+
+	int getTransactionId();
+
+	int getAccountId2();
+
+	int getTransactionId2();
+
+	int getDay();
+
+	void setDay(int d);
+
+	int getMonth();
+
+	void setMonth(int m);
+
+	int getYear();
+
+	void setYear(int y);
+
+	bool getReceiver();
+
 	virtual ~Transaction();
 
 	//TODO metodo per modificare transazione

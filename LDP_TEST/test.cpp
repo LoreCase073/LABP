@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "..\Users\lorec\source\repos\LABP\Project1\Conto.h"
+#include "..\Users\lorec\source\repos\LABP\Project1\AccountManager.h"
 
 class ContoTest : public ::testing::Test
 {
@@ -62,3 +63,4 @@ TEST_F(ContoTest, GainExpenseTransfer) {
     ASSERT_EQ(0, c.getBalance());
     ASSERT_EQ(0, c2.getBalance());
 }
+

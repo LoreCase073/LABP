@@ -33,12 +33,12 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
+    <ClCompile Include="..\Project1\AccountManager.cpp" />
     <ClCompile Include="..\Project1\Conto.cpp" />
-    <ClCompile Include="..\Project1\secondStart.cpp" />
-    <ClCompile Include="..\Project1\startProject.cpp" />
     <ClCompile Include="..\Project1\Transaction.cpp" />
     <ClCompile Include="main_test.cpp" />
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="test_AccountManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Project1\Project1.vcxproj">
@@ -49,6 +49,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Project1\AccountManager.h" />
     <ClInclude Include="..\Project1\Conto.h" />
     <ClInclude Include="..\Project1\Transaction.h" />
   </ItemGroup>

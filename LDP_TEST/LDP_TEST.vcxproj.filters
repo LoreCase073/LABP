@@ -2,19 +2,17 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="main_test.cpp" />
+    <ClCompile Include="test_AccountManager.cpp" />
+    <ClCompile Include="..\Project1\AccountManager.cpp">
+      <Filter>tested</Filter>
+    </ClCompile>
     <ClCompile Include="..\Project1\Conto.cpp">
-      <Filter>tested</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Project1\startProject.cpp">
-      <Filter>tested</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Project1\secondStart.cpp">
       <Filter>tested</Filter>
     </ClCompile>
     <ClCompile Include="..\Project1\Transaction.cpp">
       <Filter>tested</Filter>
     </ClCompile>
-    <ClCompile Include="main_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="tested">
@@ -22,14 +20,17 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Project1\AccountManager.h">
+      <Filter>tested</Filter>
+    </ClInclude>
     <ClInclude Include="..\Project1\Conto.h">
       <Filter>tested</Filter>
     </ClInclude>
     <ClInclude Include="..\Project1\Transaction.h">
       <Filter>tested</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
 </Project>

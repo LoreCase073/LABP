@@ -28,6 +28,76 @@ Transaction::Transaction(){
 
 }
 
+string Transaction::getType()
+{
+	return this->opType;
+}
+
+float Transaction::getImport()
+{
+	return this->import;
+}
+
+void Transaction::setImport(float i)
+{
+	this->import = i;
+}
+
+string Transaction::getAccount2()
+{
+	return this->account2;
+}
+
+int Transaction::getTransactionId()
+{
+	return this->tid;
+}
+
+int Transaction::getAccountId2()
+{
+	return this->aid2;
+}
+
+int Transaction::getTransactionId2()
+{
+	return this->tid2;
+}
+
+int Transaction::getDay()
+{
+	return this->day;
+}
+
+void Transaction::setDay(int d)
+{
+	this->day = d;
+}
+
+int Transaction::getMonth()
+{
+	return this->month;
+}
+
+void Transaction::setMonth(int m)
+{
+	this->month = m;
+}
+
+int Transaction::getYear()
+{
+	return this->year;
+}
+
+void Transaction::setYear(int y)
+{
+	this->year = y;
+}
+
+bool Transaction::getReceiver()
+{
+	return this->receiver;
+}
+
 Transaction::~Transaction() {
 	// TODO Auto-generated destructor stub
 }

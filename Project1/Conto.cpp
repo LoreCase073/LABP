@@ -76,12 +76,9 @@ void Conto::saveOnFile(string dir)
 {
 	Conto a(*this);
 	// save data to archive
-	string s = to_string(a.id);
-	string filedir = dir + "\\" + s;
-	_mkdir(filedir.c_str());
-	string filename = filedir + "\\" + s;
+	
 
-	std::ofstream ofs(filename);
+	std::ofstream ofs(dir);
 	{
 		boost::archive::text_oarchive oa(ofs);
 		// write class instance to archive
@@ -136,6 +133,77 @@ void Conto::insertTransfer(float import, int day, int month, int year, Conto* ac
 
 }
 
+void Conto::modifyTrans(int tid, float import, int day, int month, int year, int* ar)
+{
+	ar[0] = 0;
+	ar[1] = 0;
+	for (int i = 0; i < this->transactions.size(); i++) {
+		if (this->transactions[i].getTransactionId() == tid) {
+			this->transactions[i].setDay(day);
+			this->transactions[i].setMonth(month);
+			this->transactions[i].setYear(year);
+
+			float difference = this->transactions[i].getImport() - import;
+			if (this->transactions[i].getType()=="gain") {
+				this->balance = this->balance - difference;
+			}
+			else if (this->transactions[i].getType() == "expense") {
+				this->balance = this->balance + difference;
+			}
+			else if (this->transactions[i].getReceiver()==true) {
+				this->balance = this->balance - difference;
+			}
+			else {
+				this->balance = this->balance + difference;
+			}
+			this->transactions[i].setImport(import);
+			if (this->transactions[i].getType()=="transfer") {
+				ar[0] = this->transactions[i].getAccountId2();
+				ar[1] = this->transactions[i].getTransactionId2();
+			}
+		}
+	}
+	
+}
+
+void Conto::eraseTransfer(int tid, int* ar)
+{
+	ar[0] = -1;
+	ar[1] = -1;
+	for (int i = 0; i < this->transactions.size(); i++) {
+		if (this->transactions[i].getTransactionId() == tid) {
+
+			float difference = this->transactions[i].getImport();
+			if (this->transactions[i].getType() == "gain") {
+				this->balance = this->balance - difference;
+			}
+			else if (this->transactions[i].getType() == "expense") {
+				this->balance = this->balance + difference;
+			}
+			else if (this->transactions[i].getReceiver() == true) {
+				this->balance = this->balance - difference;
+			}
+			else {
+				this->balance = this->balance + difference;
+			}
+			if (this->transactions[i].getType() == "transfer") {
+				
+				ar[0] = this->transactions[i].getAccountId2();
+				ar[1] = this->transactions[i].getTransactionId2();
+				this->transactions.erase(this->transactions.begin()+i);
+				
+			}
+			else {
+				ar[0] = 0;
+				ar[1] = 0;
+			}
+			this->transactions.erase(this->transactions.begin() + i);
+			
+		}
+	}
+	
+}
+
 void Conto::insertGain(float import, int day, int month, int year)
 {
 	Transaction t = Transaction("gain", import, this->accountName, this->id, this->getTransCounter(), day, month, year);
@@ -156,4 +224,37 @@ void Conto::insertExpense(float import, int day, int month, int year)
 	this->incrementCounter();
 
 	this->transactions.push_back(t);
+}
+
+int Conto::getNumberOfTrans()
+{
+	return this->transactions.size();
+}
+
+void Conto::visualizeTransactions()
+{
+	cout << "Lista transazione del conto: " << this->getAccountName()<<endl;
+	for (int i = 0; i < this->transactions.size(); i++) {
+		cout << "Transaction ID: " << this->transactions[i].getTransactionId() << "\t";
+		cout << "Type: " << this->transactions[i].getType() << "\t";
+		cout << "Import: " << this->transactions[i].getImport() << "\t";
+
+		cout << "Day: " << this->transactions[i].getDay() << "\t";
+		cout << "Month: " << this->transactions[i].getMonth() << "\t";
+		cout << "year: " << this->transactions[i].getYear() << "\t";
+
+		if (this->transactions[i].getType() == "transfer") {
+			if (this->transactions[i].getReceiver()) {
+				
+			}
+			else {
+				cout << "Trasferimento in uscita " << "\t";
+			}
+			
+			cout << "Conto Coinvolto: " << this->transactions[i].getAccount2() << "\t";
+			cout << "ID2: " << this->transactions[i].getAccountId2() << "\t";
+			cout << "Transaction ID2: " << this->transactions[i].getTransactionId2() << "\t";
+
+		}
+	}
 }
