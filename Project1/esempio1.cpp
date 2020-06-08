@@ -41,10 +41,7 @@ int main() {
     Conto conto1 = Conto("Lorenzo", "Principale", 1);
     conto1.insertGain(5700, 25, 05, 2020);
     conto1.insertExpense(2700, 25, 05, 2020);
-    conto1.saveOnFile(dir);
     
-    Conto conto2;
-    conto2=conto2.readFromFile(dir, 1);
     return 0;
 }
 

@@ -14,7 +14,7 @@ class AccountManager
 {
 private:
 	string directory;
-	//vector<string> files;
+	
 	int accountCounter = 1; 
 	vector<Conto> accounts;
 

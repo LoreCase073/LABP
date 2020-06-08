@@ -51,10 +51,6 @@ public:
 	int getTransCounter();
 	void incrementCounter();
 
-	//salvare su file
-	void saveOnFile(string dir);
-	Conto readFromFile(string dir, int id);
-
 	//tipo transazione: gain, transfer or expense
 	//poi importo, giorno, mese, anno, secondo conto se transfer, se ricevente oppure no
 	void insertTransfer(float import, int day, int month, int year, Conto* account2=NULL);

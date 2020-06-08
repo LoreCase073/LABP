@@ -17,6 +17,7 @@ protected:
 
 
 TEST_F(AccountManagerTest, ReadFromFile) {
+    //provo a leggere ciò che vi è scritto nell'account creato
     AccountManager a = a.readFromFile("C:\\Users\\lorec\\source\\repos\\Project1\\Project1\\Accounts.txt");
     ASSERT_EQ(0, a.getAccountBalance(1));
     ASSERT_EQ("Principale", a.getAccountName(1));
@@ -27,7 +28,7 @@ TEST_F(AccountManagerTest, ReadFromFile) {
 }
 
 TEST_F(AccountManagerTest, Constructor2Accounts) {
-    
+    //controllo la costruzione dei due account è corretta
     ASSERT_EQ(0, ac.getAccountBalance(1));
     ASSERT_EQ("Principale", ac.getAccountName(1));
     ASSERT_EQ("Lorenzo", ac.getAccountUser(1));
@@ -37,6 +38,7 @@ TEST_F(AccountManagerTest, Constructor2Accounts) {
 }
 
 TEST_F(AccountManagerTest, CreateAccount) {
+    //testo creazione nuovo account
     ac.createAccount("Principale", "Pippo");
     
     ASSERT_EQ(0, ac.getAccountBalance(3));
@@ -45,6 +47,7 @@ TEST_F(AccountManagerTest, CreateAccount) {
 }
 
 TEST_F(AccountManagerTest, DeleteAccounts) {
+    //test cancellazione di un account e test se numero account è corretto
     ac.createAccount("Principale", "Pippo");
 
     ASSERT_EQ(0, ac.getAccountBalance(3));
@@ -58,6 +61,7 @@ TEST_F(AccountManagerTest, DeleteAccounts) {
 }
 
 TEST_F(AccountManagerTest, InsertTransactionGainExpense) {
+    //test inserimento di transazioni gain ed expense
     ac.createTransaction("gain", 1, 500.5, 27,05,2020);
     ac.createTransaction("expense", 2, 400, 27,05,2020);
 
@@ -67,6 +71,7 @@ TEST_F(AccountManagerTest, InsertTransactionGainExpense) {
 
 
 TEST_F(AccountManagerTest, InsertTransactionTransfer) {
+    //test inserimento di transazioni gain, expense e transfer
     ac.createTransaction("gain", 1, 500.5, 27, 05, 2020);
     ac.createTransaction("expense", 2, 400, 27, 05, 2020);
     ac.createTransaction("transfer", 1, 100, 27, 05, 2020,2);
@@ -76,6 +81,7 @@ TEST_F(AccountManagerTest, InsertTransactionTransfer) {
 }
 
 TEST_F(AccountManagerTest, ModifyTransactions) {
+    //test modifica di una transazione
     ac.createTransaction("gain", 1, 500.5, 27, 05, 2020);
     ac.createTransaction("expense", 2, 400, 27, 05, 2020);
     ac.createTransaction("transfer", 1, 100, 27, 05, 2020, 2);
@@ -92,6 +98,7 @@ TEST_F(AccountManagerTest, ModifyTransactions) {
 
 
 TEST_F(AccountManagerTest, ModifyTransactionsAndReadFromFile) {
+    //test inserimento transazioni, e lettura da file
     ac.createTransaction("gain", 1, 500.5, 27, 05, 2020);
     ac.createTransaction("expense", 2, 400, 27, 05, 2020);
     ac.createTransaction("transfer", 1, 100, 27, 05, 2020, 2);
@@ -113,6 +120,7 @@ TEST_F(AccountManagerTest, ModifyTransactionsAndReadFromFile) {
 
 
 TEST_F(AccountManagerTest, CancelTransactions) {
+    //test cancellazione di una transazione
     ac.createTransaction("gain", 1, 500.5, 27, 05, 2020);
     ac.createTransaction("expense", 2, 400, 27, 05, 2020);
     ac.createTransaction("transfer", 1, 100, 27, 05, 2020, 2);

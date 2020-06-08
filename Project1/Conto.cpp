@@ -72,40 +72,6 @@ void Conto::incrementCounter(){
 	this->transCounter=this->transCounter+1;
 }
 
-void Conto::saveOnFile(string dir)
-{
-	Conto a(*this);
-	// save data to archive
-	
-
-	std::ofstream ofs(dir);
-	{
-		boost::archive::text_oarchive oa(ofs);
-		// write class instance to archive
-		oa << a;
-		// archive and stream closed when destructors are called
-	}
-}
-
-
-
-
-Conto Conto::readFromFile(string dir, int id)
-{
-	string s = to_string(id);
-	string filedir = dir + "\\" + s;
-	string filename = filedir + "\\" + s;
-	Conto newg;
-	{
-		// create and open an archive for input
-		std::ifstream ifs(filename);
-		boost::archive::text_iarchive ia(ifs);
-		// read class state from archive
-		ia >> newg;
-		// archive and stream closed when destructors are called
-	}
-	return  newg;
-}
 
 void Conto::insertTransfer(float import, int day, int month, int year, Conto* account2){
 	if(account2 == NULL) //we can't transfer without a destination
@@ -168,6 +134,7 @@ void Conto::modifyTrans(int tid, float import, int day, int month, int year, int
 
 void Conto::eraseTransfer(int tid, int* ar)
 {
+	//se valore rimane -1, allora vuol dire che la transazione non esiste
 	ar[0] = -1;
 	ar[1] = -1;
 	for (int i = 0; i < this->transactions.size(); i++) {
@@ -194,6 +161,7 @@ void Conto::eraseTransfer(int tid, int* ar)
 				
 			}
 			else {
+				//serve per controllo, vuol dire che non è un transfer
 				ar[0] = 0;
 				ar[1] = 0;
 			}
