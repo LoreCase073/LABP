@@ -11,11 +11,6 @@ using namespace std;
 
 
 int mainaaaa() {
-    
-    string dir = "C:\\Users\\lorec\\source\\repos\\Project1\\Project1";
-    
-    Conto conto1 = Conto("Lorenzo", "Principale", 1);
-    conto1.insertGain(500, 25, 05, 2020);
 
 
     

@@ -21,11 +21,13 @@
   <ItemGroup>
     <ClInclude Include="AccountManager.h" />
     <ClInclude Include="Conto.h" />
+    <ClInclude Include="Date.h" />
     <ClInclude Include="Transaction.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AccountManager.cpp" />
     <ClCompile Include="Conto.cpp" />
+    <ClCompile Include="Date.cpp" />
     <ClCompile Include="esempio1.cpp" />
     <ClCompile Include="secondStart.cpp" />
     <ClCompile Include="startProject.cpp" />

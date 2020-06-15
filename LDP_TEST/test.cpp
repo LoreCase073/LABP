@@ -28,24 +28,20 @@ TEST_F(ContoTest, CounterIncrementAccountName) {
     string name = "Lorenzo";
     string account = "Principale";
     
-    
-    ASSERT_EQ(1, c.getTransCounter());
-    c.incrementCounter();
-    ASSERT_EQ(2, c.getTransCounter());
     ASSERT_EQ(account, c.getAccountName());
     ASSERT_EQ(name, c.getUser());
 }
 
 TEST_F(ContoTest, TransactionGain) {
     //test inserimento in conto della transazione gain
-    c.insertGain(200, 25, 05, 2020);
+    c.insertTransaction(Type::Gain,1, 200, 25, 05, 2020);
     ASSERT_EQ(200, c.getBalance());
 
 }
 
 TEST_F(ContoTest, TransactionExpense) {
     //test inserimento expense
-    c.insertExpense(500, 25, 05, 2020);
+    c.insertTransaction(Type::Expense, 1, 500, 25, 05, 2020);
     ASSERT_EQ(-500, c.getBalance());
 
 }
@@ -53,7 +49,7 @@ TEST_F(ContoTest, TransactionExpense) {
 TEST_F(ContoTest, TransactionTransfer) {
     //test inserimento transfer
     Conto c2 = Conto("Lorenzo", "Secondario", 2);
-    c.insertTransfer(500, 25, 05, 2020,&c2);
+    c.insertTransaction(Type::Transfer, 1, 500, 25, 05, 2020,&c2);
     ASSERT_EQ(-500, c.getBalance());
     ASSERT_EQ(500, c2.getBalance());
 
@@ -62,9 +58,9 @@ TEST_F(ContoTest, TransactionTransfer) {
 TEST_F(ContoTest, GainExpenseTransfer) {
     //test inserimento gain, expense e transfer
     Conto c2 = Conto("Lorenzo", "Secondario", 2);
-    c.insertGain(500,26,05,2020);
-    c2.insertExpense(500, 26,05,2020);
-    c.insertTransfer(500,26,05,2020,&c2);
+    c.insertTransaction(Type::Gain,1,500,26,05,2020);
+    c2.insertTransaction(Type::Expense,2,500, 26,05,2020);
+    c.insertTransaction(Type::Transfer, 3,500,26,05,2020,&c2);
     ASSERT_EQ(0, c.getBalance());
     ASSERT_EQ(0, c2.getBalance());
 }

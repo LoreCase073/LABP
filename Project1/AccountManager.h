@@ -15,14 +15,20 @@ class AccountManager
 private:
 	string directory;
 	
-	int accountCounter = 1; 
+	int accountIdCounter = 1; 
+	int transactionIdCounter = 1;
+	//TODO: list invece che vector
+
+	//TODO: fare controllo di valori non corretti tramite eccezioni, ovvero cancellare qualcosa che non c'è,
+	//cercare transazioni o conti con id non esistenti....restituiscono eccezioni....
 	vector<Conto> accounts;
 
 	friend class boost::serialization::access;
 	template<class Archive>
 	void serialize(Archive& ar, const unsigned int version) {
 		ar& directory;
-		ar& accountCounter;
+		ar& accountIdCounter;
+		ar& transactionIdCounter;
 		ar& accounts;
 	}
 
@@ -35,18 +41,24 @@ public:
 
 	void createAccount(string name, string user);
 
-	void incrementCounter() {
-		this->accountCounter++;
+	void incrementIdAccountCounter() {
+		this->accountIdCounter++;
+	}
+
+	void incrementIdTransactionCounter() {
+		this->transactionIdCounter++;
 	}
 
 	void deleteAccount(int id);
 	//transaction type: gain, expense, transfer from-to--this case need a second id account
-	void createTransaction(string trans, int accountId, float import, int day, int month, int year, int accountId2=-1);
+	void createTransaction(Type trans, int accountId, float import, int day, int month, int year, int accountId2=0);
 
 	void modifyTransaction(int accountId, int tid, float import, int day, int month, int year);
 
 	void eraseTransaction(int aid, int tid);
+
 	//ritorna -1 se non ha trovato l'account
+
 	int findAccountIndex(int id);
 
 	float getAccountBalance(int id);
@@ -56,8 +68,6 @@ public:
 	string getAccountUser(int id);
 
 	int getNumberOfAccounts();
-
-	int getNumberOfTransactions(int id);
 
 	void visualizeAccounts();
 

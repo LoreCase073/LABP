@@ -35,6 +35,7 @@
   <ItemGroup>
     <ClCompile Include="..\Project1\AccountManager.cpp" />
     <ClCompile Include="..\Project1\Conto.cpp" />
+    <ClCompile Include="..\Project1\Date.cpp" />
     <ClCompile Include="..\Project1\Transaction.cpp" />
     <ClCompile Include="main_test.cpp" />
     <ClCompile Include="test.cpp" />
@@ -51,6 +52,7 @@
   <ItemGroup>
     <ClInclude Include="..\Project1\AccountManager.h" />
     <ClInclude Include="..\Project1\Conto.h" />
+    <ClInclude Include="..\Project1\Date.h" />
     <ClInclude Include="..\Project1\Transaction.h" />
   </ItemGroup>
   <ItemDefinitionGroup />

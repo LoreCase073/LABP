@@ -62,8 +62,8 @@ TEST_F(AccountManagerTest, DeleteAccounts) {
 
 TEST_F(AccountManagerTest, InsertTransactionGainExpense) {
     //test inserimento di transazioni gain ed expense
-    ac.createTransaction("gain", 1, 500.5, 27,05,2020);
-    ac.createTransaction("expense", 2, 400, 27,05,2020);
+    ac.createTransaction(Type::Gain, 1, 500.5, 27,05,2020);
+    ac.createTransaction(Type::Expense, 2, 400, 27,05,2020);
 
     ASSERT_EQ(500.5,ac.getAccountBalance(1));
     ASSERT_EQ(-400, ac.getAccountBalance(2));
@@ -72,9 +72,9 @@ TEST_F(AccountManagerTest, InsertTransactionGainExpense) {
 
 TEST_F(AccountManagerTest, InsertTransactionTransfer) {
     //test inserimento di transazioni gain, expense e transfer
-    ac.createTransaction("gain", 1, 500.5, 27, 05, 2020);
-    ac.createTransaction("expense", 2, 400, 27, 05, 2020);
-    ac.createTransaction("transfer", 1, 100, 27, 05, 2020,2);
+    ac.createTransaction(Type::Gain, 1, 500.5, 27, 05, 2020);
+    ac.createTransaction(Type::Expense, 2, 400, 27, 05, 2020);
+    ac.createTransaction(Type::Transfer, 1, 100, 27, 05, 2020,2);
 
     ASSERT_EQ(400.5, ac.getAccountBalance(1));
     ASSERT_EQ(-300, ac.getAccountBalance(2));
@@ -82,15 +82,15 @@ TEST_F(AccountManagerTest, InsertTransactionTransfer) {
 
 TEST_F(AccountManagerTest, ModifyTransactions) {
     //test modifica di una transazione
-    ac.createTransaction("gain", 1, 500.5, 27, 05, 2020);
-    ac.createTransaction("expense", 2, 400, 27, 05, 2020);
-    ac.createTransaction("transfer", 1, 100, 27, 05, 2020, 2);
+    ac.createTransaction(Type::Gain, 1, 500.5, 27, 05, 2020);
+    ac.createTransaction(Type::Expense, 2, 400, 27, 05, 2020);
+    ac.createTransaction(Type::Transfer, 1, 100, 27, 05, 2020, 2);
 
     ac.modifyTransaction(1,1,300,27,05,2020);
-    ac.modifyTransaction(2, 1, 300, 27, 05, 2020);
+    ac.modifyTransaction(2, 2, 300, 27, 05, 2020);
     ASSERT_EQ(200, ac.getAccountBalance(1));
     ASSERT_EQ(-200, ac.getAccountBalance(2));
-    ac.modifyTransaction(1, 2, 300, 27, 05, 2020);
+    ac.modifyTransaction(1, 3, 300, 27, 05, 2020);
 
     ASSERT_EQ(0, ac.getAccountBalance(1));
     ASSERT_EQ(0, ac.getAccountBalance(2));
@@ -99,12 +99,12 @@ TEST_F(AccountManagerTest, ModifyTransactions) {
 
 TEST_F(AccountManagerTest, ModifyTransactionsAndReadFromFile) {
     //test inserimento transazioni, e lettura da file
-    ac.createTransaction("gain", 1, 500.5, 27, 05, 2020);
-    ac.createTransaction("expense", 2, 400, 27, 05, 2020);
-    ac.createTransaction("transfer", 1, 100, 27, 05, 2020, 2);
+    ac.createTransaction(Type::Gain, 1, 500.5, 27, 05, 2020);
+    ac.createTransaction(Type::Expense, 2, 400, 27, 05, 2020);
+    ac.createTransaction(Type::Transfer, 1, 100, 27, 05, 2020, 2);
 
     ac.modifyTransaction(1, 1, 300, 27, 05, 2020);
-    ac.modifyTransaction(2, 1, 300, 27, 05, 2020);
+    ac.modifyTransaction(2, 2, 300, 27, 05, 2020);
     ASSERT_EQ(200, ac.getAccountBalance(1));
     ASSERT_EQ(-200, ac.getAccountBalance(2));
 
@@ -112,7 +112,6 @@ TEST_F(AccountManagerTest, ModifyTransactionsAndReadFromFile) {
     a=a.readFromFile("C:\\Users\\lorec\\source\\repos\\Project1\\Project1\\Accounts.txt");
     ASSERT_EQ(200, a.getAccountBalance(1));
     ASSERT_EQ(-200, a.getAccountBalance(2));
-    ASSERT_EQ(2, a.getNumberOfTransactions(2));
     
 
 }
@@ -121,16 +120,16 @@ TEST_F(AccountManagerTest, ModifyTransactionsAndReadFromFile) {
 
 TEST_F(AccountManagerTest, CancelTransactions) {
     //test cancellazione di una transazione
-    ac.createTransaction("gain", 1, 500.5, 27, 05, 2020);
-    ac.createTransaction("expense", 2, 400, 27, 05, 2020);
-    ac.createTransaction("transfer", 1, 100, 27, 05, 2020, 2);
+    ac.createTransaction(Type::Gain, 1, 500.5, 27, 05, 2020);
+    ac.createTransaction(Type::Expense, 2, 400, 27, 05, 2020);
+    ac.createTransaction(Type::Transfer, 1, 100, 27, 05, 2020, 2);
 
     ac.modifyTransaction(1, 1, 300, 27, 05, 2020);
-    ac.modifyTransaction(2, 1, 300, 27, 05, 2020);
+    ac.modifyTransaction(2, 2, 300, 27, 05, 2020);
     ASSERT_EQ(200, ac.getAccountBalance(1));
     ASSERT_EQ(-200, ac.getAccountBalance(2));
-    ac.modifyTransaction(1, 2, 300, 27, 05, 2020);
-    ac.eraseTransaction(2,1);
+    ac.modifyTransaction(1, 3, 300, 27, 05, 2020);
+    ac.eraseTransaction(2,2);
 
     ASSERT_EQ(0, ac.getAccountBalance(1));
     ASSERT_EQ(300, ac.getAccountBalance(2));

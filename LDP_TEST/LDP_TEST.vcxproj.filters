@@ -10,6 +10,9 @@
     <ClCompile Include="..\Project1\Conto.cpp">
       <Filter>tested</Filter>
     </ClCompile>
+    <ClCompile Include="..\Project1\Date.cpp">
+      <Filter>tested</Filter>
+    </ClCompile>
     <ClCompile Include="..\Project1\Transaction.cpp">
       <Filter>tested</Filter>
     </ClCompile>
@@ -27,6 +30,9 @@
       <Filter>tested</Filter>
     </ClInclude>
     <ClInclude Include="..\Project1\Conto.h">
+      <Filter>tested</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Project1\Date.h">
       <Filter>tested</Filter>
     </ClInclude>
     <ClInclude Include="..\Project1\Transaction.h">

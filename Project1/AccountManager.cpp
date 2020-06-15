@@ -48,11 +48,11 @@ AccountManager AccountManager::readFromFile(string dir)
 
 void AccountManager::createAccount(string name, string user)
 {
-	Conto a = Conto(user, name, accountCounter);
+	Conto a = Conto(user, name, accountIdCounter);
 	
 	this->accounts.push_back(a);
 	
-	this->incrementCounter();
+	this->incrementIdAccountCounter();
 	saveOnFile(this->directory);
 }
 
@@ -75,25 +75,24 @@ void AccountManager::deleteAccount(int id)
 }
 
 
-void AccountManager::createTransaction(string trans, int accountId, float importo, int day, int month, int year, int accountId2)
+void AccountManager::createTransaction(Type trans, int accountId, float importo, int day, int month, int year, int accountId2)
 {
 	
 	int index = this->findAccountIndex(accountId);
-	
-	
-	if (trans=="gain") {
-		this->accounts[index].insertGain(importo, day, month, year);
-	}
-	else if (trans == "expense") {
-		this->accounts[index].insertExpense(importo, day, month, year);
-	}
-	else if (trans == "transfer" && accountId2!=-1) {
+	if (accountId2 != 0 && Type::Transfer==trans) {
 		int index2 = this->findAccountIndex(accountId2);
-		this->accounts[index].insertTransfer(importo, day, month, year, &this->accounts[index2]);
+		this->accounts[index].insertTransaction(trans, this->transactionIdCounter, importo, day, month, year, &this->accounts[index2]);
+		this->incrementIdTransactionCounter();
+	}
+	else if (Type::Transfer != trans) {
+		int index2 = this->findAccountIndex(accountId2);
+		this->accounts[index].insertTransaction(trans, this->transactionIdCounter, importo, day, month, year);
+		this->incrementIdTransactionCounter();
 	}
 	else {
-		cout << "Errore!" << endl;
+		//TODO forse ritornare errore perchè non inserito parametro per accountid2
 	}
+
 	saveOnFile(this->directory);
 }
 
@@ -110,6 +109,7 @@ void AccountManager::modifyTransaction(int accountId, int tid, float import, int
 		if (c2[0]!=0) {
 			int index2 = this->findAccountIndex(c2[0]);
 			if (index2 == -1) {
+				//TODO gestire con eccezioni
 				cout << "Secondo conto non trovato. Eliminato in precedenza" << endl;
 			}
 			else {
@@ -129,15 +129,16 @@ void AccountManager::eraseTransaction(int aid, int tid)
 	}
 	else {
 		int c2[2];
-		this->accounts[index].eraseTransfer(tid, c2);
+		this->accounts[index].eraseTrans(tid, c2);
 		if (c2[0]!=0 && c2[0]!=-1) {
 			int index2 = this->findAccountIndex(c2[0]);
 			if (index2 == -1) {
+				//gestire con eccezioni
 				cout << "Secondo conto non trovato. Eliminato in precedenza" << endl;
 			}
 			else {
 				int tmp[2];
-				this->accounts[index2].eraseTransfer(c2[1], tmp);
+				this->accounts[index2].eraseTrans(c2[1], tmp);
 			}
 		}
 		else if (c2[0] == -1) {
@@ -200,17 +201,6 @@ string AccountManager::getAccountUser(int id)
 int AccountManager::getNumberOfAccounts()
 {
 	return this->accounts.size();
-}
-
-int AccountManager::getNumberOfTransactions(int id)
-{
-	int index = this->findAccountIndex(id);
-	if (index == -1) {
-		cout << "Account non trovato!" << endl;
-		return 0;
-	}
-	else
-		return this->accounts[index].getNumberOfTrans();
 }
 
 

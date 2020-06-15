@@ -9,28 +9,26 @@
 #include "Transaction.h"
 using namespace std;
 
-Transaction::Transaction(string t, float i, string a, int id, int tid, int d, int m, int y, string a2, int aid2, int tid2, bool receiver) {
+
+Transaction::Transaction(Type t, float i,int id, int tid, int d, int m, int y, int aid2) {
 	this->opType=t;
 	this->import=i;
-	this->account =a;
-	this->aid=id;
-	this->tid=tid;
-	this->day=d;
-	this->month = m;
-	this->year=y;
-	this->account2=a2;
-	this->receiver = receiver;
-	this->aid2 = aid2;
-	this->tid2 = tid2;
+	this->accountIdFrom=id;
+	this->transactionId=tid;
+	
+	this->accountIdTo = aid2;
+
+	this->date = Date(d, m, y);
 
 }
 Transaction::Transaction(){
-
+	this->date = Date(1, 1, 1900);
 }
 
-string Transaction::getType()
+Type Transaction::getType()
 {
-	return this->opType;
+	Type t = this->opType;
+	return t;
 }
 
 float Transaction::getImport()
@@ -43,59 +41,44 @@ void Transaction::setImport(float i)
 	this->import = i;
 }
 
-string Transaction::getAccount2()
+int Transaction::getAccountIdFrom()
 {
-	return this->account2;
+	return this->accountIdFrom;
 }
 
 int Transaction::getTransactionId()
 {
-	return this->tid;
+	return this->transactionId;
 }
 
-int Transaction::getAccountId2()
+int Transaction::getAccountIdTo()
 {
-	return this->aid2;
+	return this->accountIdTo;
 }
 
-int Transaction::getTransactionId2()
+void Transaction::setDate(int y, int m, int d)
 {
-	return this->tid2;
+	this->date = Date(d, m, y);
 }
+
+
 
 int Transaction::getDay()
 {
-	return this->day;
+	return this->date.getDay();
 }
 
-void Transaction::setDay(int d)
-{
-	this->day = d;
-}
 
 int Transaction::getMonth()
 {
-	return this->month;
+	return this->date.getMonth();
 }
 
-void Transaction::setMonth(int m)
-{
-	this->month = m;
-}
+
 
 int Transaction::getYear()
 {
-	return this->year;
-}
-
-void Transaction::setYear(int y)
-{
-	this->year = y;
-}
-
-bool Transaction::getReceiver()
-{
-	return this->receiver;
+	return this->date.getYear();
 }
 
 Transaction::~Transaction() {

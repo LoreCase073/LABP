@@ -20,8 +20,8 @@ private:
 	string user;
 	string accountName;
 	int id;
-	int transCounter;
 	float balance;
+	//TODO: list invece che vector
 	vector<Transaction> transactions;
 	friend class boost::serialization::access;
 	template<class Archive>
@@ -29,7 +29,6 @@ private:
 		ar& user;
 		ar& accountName;
 		ar& id;
-		ar& transCounter;
 		ar& balance;
 		ar& transactions;
 	}
@@ -40,7 +39,7 @@ public:
 	Conto(string p, string nc, int id);
 	Conto(const Conto& copy);
 	Conto();
-	virtual ~Conto();
+	~Conto();
 
 	void setUser(string x);
 	string getUser();
@@ -48,22 +47,19 @@ public:
 	string getAccountName();
 	float getBalance();
 	int getId();
-	int getTransCounter();
-	void incrementCounter();
+
+	//TODO: riassumere gain expense e transfer in una sola transazione e chiamare metodi per creazione
+	//direttamente da conto, invece che da AccountManager
 
 	//tipo transazione: gain, transfer or expense
-	//poi importo, giorno, mese, anno, secondo conto se transfer, se ricevente oppure no
-	void insertTransfer(float import, int day, int month, int year, Conto* account2=NULL);
+	//poi importo, giorno, mese, anno, secondo conto se transfer
+	void insertTransaction(Type t,int tid, float import, int day, int month, int year, Conto* account2=NULL);
 	
 	void modifyTrans(int tid, float import, int day, int month, int year, int* ar);
 
-	void eraseTransfer(int tid, int* ar);
+	void eraseTrans(int tid, int* ar);
 
-	void insertGain(float import, int day, int month, int year);
-
-	void insertExpense(float import, int day, int month, int year);
-
-	int getNumberOfTrans();
+	
 
 	void visualizeTransactions();
 
