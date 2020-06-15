@@ -71,6 +71,9 @@ void AccountManager::deleteAccount(int id)
 		cout << "Account eliminato" << endl;
 
 	}
+	else {
+		throw "Account non trovato!";
+	}
 	saveOnFile(this->directory);
 }
 
@@ -101,7 +104,7 @@ void AccountManager::modifyTransaction(int accountId, int tid, float import, int
 	int index = this->findAccountIndex(accountId);
 
 	if (index == -1) {
-		cout << "Errore!" << endl;
+		throw "Account non trovato!";
 	}
 	else {
 		int c2[2];
@@ -110,7 +113,7 @@ void AccountManager::modifyTransaction(int accountId, int tid, float import, int
 			int index2 = this->findAccountIndex(c2[0]);
 			if (index2 == -1) {
 				//TODO gestire con eccezioni
-				cout << "Secondo conto non trovato. Eliminato in precedenza" << endl;
+				cout << "Secondo conto non trovato. Probabilmente eliminato in precedenza" << endl;
 			}
 			else {
 				this->accounts[index2].modifyTrans(c2[1],import, day, month, year,c2);
@@ -125,7 +128,7 @@ void AccountManager::eraseTransaction(int aid, int tid)
 	int index = this->findAccountIndex(aid);
 
 	if (index == -1) {
-		cout << "Errore!" << endl;
+		throw "Account non trovato!";
 	}
 	else {
 		int c2[2];
@@ -133,8 +136,7 @@ void AccountManager::eraseTransaction(int aid, int tid)
 		if (c2[0]!=0 && c2[0]!=-1) {
 			int index2 = this->findAccountIndex(c2[0]);
 			if (index2 == -1) {
-				//gestire con eccezioni
-				cout << "Secondo conto non trovato. Eliminato in precedenza" << endl;
+				cout << "Secondo conto non trovato. Probabilmente eliminato in precedenza" << endl;
 			}
 			else {
 				int tmp[2];
@@ -142,7 +144,7 @@ void AccountManager::eraseTransaction(int aid, int tid)
 			}
 		}
 		else if (c2[0] == -1) {
-			cout << "Transazione non trovata" << endl;
+			throw "Transazione non trovata!";
 		}
 	}
 	saveOnFile(this->directory);
@@ -168,8 +170,7 @@ float AccountManager::getAccountBalance(int id)
 {
 	int index = this->findAccountIndex(id);
 	if (index == -1) {
-		cout << "Account non trovato!" << endl;
-		return 0;
+		throw "Account non trovato!";
 	}
 	else
 		return this->accounts[index].getBalance();
@@ -180,8 +181,7 @@ string AccountManager::getAccountName(int id)
 {
 	int index = this->findAccountIndex(id);
 	if (index == -1) {
-		cout << "Account non trovato!" << endl;
-		return 0;
+		throw "Account non trovato!";
 	}
 	else
 		return this->accounts[index].getAccountName();
@@ -191,8 +191,7 @@ string AccountManager::getAccountUser(int id)
 {
 	int index = this->findAccountIndex(id);
 	if (index == -1) {
-		cout << "Account non trovato!" << endl;
-		return 0;
+		throw "Account non trovato!";
 	}
 	else
 		return this->accounts[index].getUser();
@@ -220,7 +219,7 @@ void AccountManager::visualizeTransactions(int d)
 {
 	int index = this->findAccountIndex(d);
 	if (index == -1) {
-		cout << "Account non trovato!" << endl;
+		throw "Account non trovato!";
 		
 	}
 	else {

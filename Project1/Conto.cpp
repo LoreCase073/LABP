@@ -97,32 +97,33 @@ void Conto::modifyTrans(int tid, float import, int day, int month, int year, int
 {
 	ar[0] = 0;
 	ar[1] = 0;
-	for (int i = 0; i < this->transactions.size(); i++) {
-		if (this->transactions[i].getTransactionId() == tid) {
-			this->transactions[i].setDate(year, month, day);
+	list<Transaction>::iterator it;
+	for (it = this->transactions.begin(); it != this->transactions.end(); ++it) {
+		if (it->getTransactionId() == tid) {
+			it->setDate(year, month, day);
 
-			float difference = this->transactions[i].getImport() - import;
-			if (this->transactions[i].getType()==Type::Gain) {
+			float difference = it->getImport() - import;
+			if (it->getType()==Type::Gain) {
 				this->balance = this->balance - difference;
 			}
-			else if (this->transactions[i].getType() == Type::Expense) {
+			else if (it->getType() == Type::Expense) {
 				this->balance = this->balance + difference;
 			}
-			else if (this->transactions[i].getAccountIdFrom() == this->getId()) {
+			else if (it->getAccountIdFrom() == this->getId()) {
 				this->balance = this->balance + difference;
 			}
 			else {
 				this->balance = this->balance - difference;
 			}
-			this->transactions[i].setImport(import);
-			if (this->transactions[i].getType()==Type::Transfer) {
-				if (this->transactions[i].getAccountIdFrom() == this->getId()) {
-					ar[0] = this->transactions[i].getAccountIdTo();
-					ar[1] = this->transactions[i].getTransactionId();
+			it->setImport(import);
+			if (it->getType()==Type::Transfer) {
+				if (it->getAccountIdFrom() == this->getId()) {
+					ar[0] = it->getAccountIdTo();
+					ar[1] = it->getTransactionId();
 				}
 				else {
-					ar[0] = this->transactions[i].getAccountIdFrom();
-					ar[1] = this->transactions[i].getTransactionId();
+					ar[0] = it->getAccountIdFrom();
+					ar[1] = it->getTransactionId();
 				}
 			}
 		}
@@ -134,31 +135,32 @@ void Conto::eraseTrans(int tid, int* ar)
 {
 	//se valore rimane -1, allora vuol dire che la transazione non esiste
 	ar[0] = -1;
-	ar[1] = -1;
-	for (int i = 0; i < this->transactions.size(); i++) {
-		if (this->transactions[i].getTransactionId() == tid) {
+	ar[1] = -1; 
+	list<Transaction>::iterator it;
+	for (it = this->transactions.begin(); it != this->transactions.end(); it++) {
+		if (it->getTransactionId() == tid) {
 
-			float difference = this->transactions[i].getImport();
-			if (this->transactions[i].getType() == Type::Gain) {
+			float difference = it->getImport();
+			if (it->getType() == Type::Gain) {
 				this->balance = this->balance - difference;
 			}
-			else if (this->transactions[i].getType() == Type::Expense) {
+			else if (it->getType() == Type::Expense) {
 				this->balance = this->balance + difference;
 			}
-			else if (this->transactions[i].getAccountIdFrom() == this->getId()) {
+			else if (it->getAccountIdFrom() == this->getId()) {
 				this->balance = this->balance + difference;
 			}
 			else {
 				this->balance = this->balance - difference;
 			}
-			if (this->transactions[i].getType() == Type::Transfer) {
-				if (this->transactions[i].getAccountIdFrom() == this->getId()) {
-					ar[0] = this->transactions[i].getAccountIdTo();
-					ar[1] = this->transactions[i].getTransactionId();
+			if (it->getType() == Type::Transfer) {
+				if (it->getAccountIdFrom() == this->getId()) {
+					ar[0] = it->getAccountIdTo();
+					ar[1] = it->getTransactionId();
 				}
 				else {
-					ar[0] = this->transactions[i].getAccountIdFrom();
-					ar[1] = this->transactions[i].getTransactionId();
+					ar[0] = it->getAccountIdFrom();
+					ar[1] = it->getTransactionId();
 				}
 			}
 			else {
@@ -167,8 +169,7 @@ void Conto::eraseTrans(int tid, int* ar)
 				ar[0] = 0;
 				ar[1] = 0;
 			}
-			this->transactions.erase(this->transactions.begin() + i);
-			
+			it = this->transactions.erase(it);
 		}
 	}
 	
@@ -177,13 +178,14 @@ void Conto::eraseTrans(int tid, int* ar)
 void Conto::visualizeTransactions()
 {
 	cout << "Lista transazione del conto: " << this->getAccountName()<<endl;
-	for (int i = 0; i < this->transactions.size(); i++) {
-		cout << "Transaction ID: " << this->transactions[i].getTransactionId() << "\t";
-		cout << "Import: " << this->transactions[i].getImport() << "\t";
+	list<Transaction>::iterator it;
+	for (it = this->transactions.begin(); it != this->transactions.end(); it++) {
+		cout << "Transaction ID: " << it->getTransactionId() << "\t";
+		cout << "Import: " << it->getImport() << "\t";
 
-		cout << "Day: " << this->transactions[i].getDay() << "\t";
-		cout << "Month: " << this->transactions[i].getMonth() << "\t";
-		cout << "year: " << this->transactions[i].getYear() << "\t";
+		cout << "Day: " << it->getDay() << "\t";
+		cout << "Month: " << it->getMonth() << "\t";
+		cout << "year: " << it->getYear() << "\t";
 
 		
 	}
