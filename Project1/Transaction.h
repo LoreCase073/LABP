@@ -17,16 +17,17 @@ enum class Type { Gain, Expense, Transfer }; //tipi di transazioni: guadagno(gai
 
 class Transaction {
 private:
-	//TODO: invece che string, fare opType class enum
+
 	
 	Type opType;
 	float import;
 	int transactionId;
 	int accountIdTo;
-	//TODO: togliere receiver e modificare id conti in idfrom e idto
+
 	int accountIdFrom;
-	//TODO: inserire data non come interi, ma come classe per controllare calendario gregoriano
+
 	Date date = Date(1,1,1900);
+
 	//serialization with boost
 	friend class boost::serialization::access;
 	template<class Archive>
@@ -67,8 +68,6 @@ public:
 	int getYear();
 
 	virtual ~Transaction();
-
-	//TODO metodo per modificare transazione
 
 
 };

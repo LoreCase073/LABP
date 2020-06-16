@@ -17,10 +17,7 @@ private:
 	
 	int accountIdCounter = 1; 
 	int transactionIdCounter = 1;
-	//TODO: list invece che vector
 
-	//TODO: fare controllo di valori non corretti tramite eccezioni, ovvero cancellare qualcosa che non c'è,
-	//cercare transazioni o conti con id non esistenti....restituiscono eccezioni....
 	vector<Conto> accounts;
 
 	friend class boost::serialization::access;
@@ -50,14 +47,13 @@ public:
 	}
 
 	void deleteAccount(int id);
-	//transaction type: gain, expense, transfer from-to--this case need a second id account
+
 	void createTransaction(Type trans, int accountId, float import, int day, int month, int year, int accountId2=0);
 
 	void modifyTransaction(int accountId, int tid, float import, int day, int month, int year);
 
 	void eraseTransaction(int aid, int tid);
 
-	//ritorna -1 se non ha trovato l'account
 
 	int findAccountIndex(int id);
 

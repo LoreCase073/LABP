@@ -93,7 +93,7 @@ void AccountManager::createTransaction(Type trans, int accountId, float importo,
 		this->incrementIdTransactionCounter();
 	}
 	else {
-		//TODO forse ritornare errore perchè non inserito parametro per accountid2
+		throw exception("Non è stato inserito il secondo id per la creazione della transazione transfer!");
 	}
 
 	saveOnFile(this->directory);
@@ -112,7 +112,7 @@ void AccountManager::modifyTransaction(int accountId, int tid, float import, int
 		if (c2[0]!=0) {
 			int index2 = this->findAccountIndex(c2[0]);
 			if (index2 == -1) {
-				//TODO gestire con eccezioni
+				
 				cout << "Secondo conto non trovato. Probabilmente eliminato in precedenza" << endl;
 			}
 			else {
@@ -151,7 +151,7 @@ void AccountManager::eraseTransaction(int aid, int tid)
 }
 
 
-//ritorna -1 se non ha trovato l'account con quell'identificativo
+
 int AccountManager::findAccountIndex(int id)
 {
 	

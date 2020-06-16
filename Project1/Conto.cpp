@@ -164,8 +164,6 @@ void Conto::eraseTrans(int tid, int* ar)
 				}
 			}
 			else {
-				//serve per controllo, vuol dire che non è un transfer
-				//modificare con eccezioni
 				ar[0] = 0;
 				ar[1] = 0;
 			}
