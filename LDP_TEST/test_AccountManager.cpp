@@ -68,8 +68,9 @@ TEST_F(AccountManagerTest, DeleteWrongAccount) {
 
 TEST_F(AccountManagerTest, InsertTransactionGainExpense) {
     //test inserimento di transazioni gain ed expense
-    ac.createTransaction(Type::Gain, 1, 500.5, 27,05,2020);
-    ac.createTransaction(Type::Expense, 2, 400, 27,05,2020);
+    Date d = Date(25, 05, 2020);
+    ac.createTransaction(Type::Gain, 1, 500.5, d);
+    ac.createTransaction(Type::Expense, 2, 400, d);
 
     ASSERT_EQ(500.5,ac.getAccountBalance(1));
     ASSERT_EQ(-400, ac.getAccountBalance(2));
@@ -78,9 +79,10 @@ TEST_F(AccountManagerTest, InsertTransactionGainExpense) {
 
 TEST_F(AccountManagerTest, InsertTransactionTransfer) {
     //test inserimento di transazioni gain, expense e transfer
-    ac.createTransaction(Type::Gain, 1, 500.5, 27, 05, 2020);
-    ac.createTransaction(Type::Expense, 2, 400, 27, 05, 2020);
-    ac.createTransaction(Type::Transfer, 1, 100, 27, 05, 2020,2);
+    Date d = Date(25, 05, 2020);
+    ac.createTransaction(Type::Gain, 1, 500.5, d);
+    ac.createTransaction(Type::Expense, 2, 400, d);
+    ac.createTransaction(Type::Transfer, 1, 100, d,2);
 
     ASSERT_EQ(400.5, ac.getAccountBalance(1));
     ASSERT_EQ(-300, ac.getAccountBalance(2));
@@ -88,15 +90,16 @@ TEST_F(AccountManagerTest, InsertTransactionTransfer) {
 
 TEST_F(AccountManagerTest, ModifyTransactions) {
     //test modifica di una transazione
-    ac.createTransaction(Type::Gain, 1, 500.5, 27, 05, 2020);
-    ac.createTransaction(Type::Expense, 2, 400, 27, 05, 2020);
-    ac.createTransaction(Type::Transfer, 1, 100, 27, 05, 2020, 2);
+    Date d = Date(25, 05, 2020);
+    ac.createTransaction(Type::Gain, 1, 500.5, d);
+    ac.createTransaction(Type::Expense, 2, 400, d);
+    ac.createTransaction(Type::Transfer, 1, 100, d, 2);
 
-    ac.modifyTransaction(1,1,300,27,05,2020);
-    ac.modifyTransaction(2, 2, 300, 27, 05, 2020);
+    ac.modifyTransaction(1,1,300,d);
+    ac.modifyTransaction(2, 2, 300, d);
     ASSERT_EQ(200, ac.getAccountBalance(1));
     ASSERT_EQ(-200, ac.getAccountBalance(2));
-    ac.modifyTransaction(1, 3, 300, 27, 05, 2020);
+    ac.modifyTransaction(1, 3, 300, d);
 
     ASSERT_EQ(0, ac.getAccountBalance(1));
     ASSERT_EQ(0, ac.getAccountBalance(2));
@@ -105,12 +108,13 @@ TEST_F(AccountManagerTest, ModifyTransactions) {
 
 TEST_F(AccountManagerTest, ModifyTransactionsAndReadFromFile) {
     //test inserimento transazioni, e lettura da file
-    ac.createTransaction(Type::Gain, 1, 500.5, 27, 05, 2020);
-    ac.createTransaction(Type::Expense, 2, 400, 27, 05, 2020);
-    ac.createTransaction(Type::Transfer, 1, 100, 27, 05, 2020, 2);
+    Date d = Date(25, 05, 2020);
+    ac.createTransaction(Type::Gain, 1, 500.5, d);
+    ac.createTransaction(Type::Expense, 2, 400, d);
+    ac.createTransaction(Type::Transfer, 1, 100,d, 2);
 
-    ac.modifyTransaction(1, 1, 300, 27, 05, 2020);
-    ac.modifyTransaction(2, 2, 300, 27, 05, 2020);
+    ac.modifyTransaction(1, 1, 300,d);
+    ac.modifyTransaction(2, 2, 300, d);
     ASSERT_EQ(200, ac.getAccountBalance(1));
     ASSERT_EQ(-200, ac.getAccountBalance(2));
 
@@ -126,15 +130,16 @@ TEST_F(AccountManagerTest, ModifyTransactionsAndReadFromFile) {
 
 TEST_F(AccountManagerTest, CancelTransactions) {
     //test cancellazione di una transazione
-    ac.createTransaction(Type::Gain, 1, 500.5, 27, 05, 2020);
-    ac.createTransaction(Type::Expense, 2, 400, 27, 05, 2020);
-    ac.createTransaction(Type::Transfer, 1, 100, 27, 05, 2020, 2);
+    Date d = Date(25, 05, 2020);
+    ac.createTransaction(Type::Gain, 1, 500.5, d);
+    ac.createTransaction(Type::Expense, 2, 400, d);
+    ac.createTransaction(Type::Transfer, 1, 100, d, 2);
 
-    ac.modifyTransaction(1, 1, 300, 27, 05, 2020);
-    ac.modifyTransaction(2, 2, 300, 27, 05, 2020);
+    ac.modifyTransaction(1, 1, 300, d);
+    ac.modifyTransaction(2, 2, 300, d);
     ASSERT_EQ(200, ac.getAccountBalance(1));
     ASSERT_EQ(-200, ac.getAccountBalance(2));
-    ac.modifyTransaction(1, 3, 300, 27, 05, 2020);
+    ac.modifyTransaction(1, 3, 300, d);
     ac.eraseTransaction(2,2);
 
     ASSERT_EQ(0, ac.getAccountBalance(1));

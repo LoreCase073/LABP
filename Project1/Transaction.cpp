@@ -10,7 +10,7 @@
 using namespace std;
 
 
-Transaction::Transaction(Type t, float i,int id, int tid, int d, int m, int y, int aid2) {
+Transaction::Transaction(Type t, float i,int id, int tid, Date d, int aid2) {
 	this->opType=t;
 	this->import=i;
 	this->accountIdFrom=id;
@@ -18,7 +18,7 @@ Transaction::Transaction(Type t, float i,int id, int tid, int d, int m, int y, i
 	
 	this->accountIdTo = aid2;
 
-	this->date = Date(d, m, y);
+	this->date = d;
 
 }
 
@@ -57,9 +57,9 @@ int Transaction::getAccountIdTo()
 	return this->accountIdTo;
 }
 
-void Transaction::setDate(int y, int m, int d)
+void Transaction::setDate(Date d)
 {
-	this->date = Date(d, m, y);
+	this->date = d;
 }
 
 

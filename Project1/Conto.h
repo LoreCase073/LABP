@@ -47,9 +47,9 @@ public:
 	float getBalance();
 	int getId();
 
-	void insertTransaction(Type t,int tid, float import, int day, int month, int year, Conto* account2=NULL);
+	void insertTransaction(Type t,int tid, float import, Date d, Conto* account2=NULL);
 	
-	void modifyTrans(int tid, float import, int day, int month, int year, int* ar);
+	void modifyTrans(int tid, float import, Date d, int* ar);
 
 	void eraseTrans(int tid, int* ar);
 

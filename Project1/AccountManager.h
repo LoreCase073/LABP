@@ -48,9 +48,9 @@ public:
 
 	void deleteAccount(int id);
 
-	void createTransaction(Type trans, int accountId, float import, int day, int month, int year, int accountId2=0);
+	void createTransaction(Type trans, int accountId, float import, Date d, int accountId2=0);
 
-	void modifyTransaction(int accountId, int tid, float import, int day, int month, int year);
+	void modifyTransaction(int accountId, int tid, float import, Date d);
 
 	void eraseTransaction(int aid, int tid);
 

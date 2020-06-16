@@ -63,17 +63,17 @@ int Conto::getId(){
 }
 
 
-void Conto::insertTransaction(Type type, int tid, float import, int day, int month, int year, Conto* account2)
+void Conto::insertTransaction(Type type, int tid, float import, Date d, Conto* account2)
 {
 	if (type == Type::Gain) {
-		Transaction t = Transaction(type, import, this->id, tid, day, month, year);
+		Transaction t = Transaction(type, import, this->id, tid, d);
 
 		this->balance = this->balance + import;
 
 		this->transactions.push_back(t);
 	}
 	else if (type == Type::Expense) {
-		Transaction t = Transaction(type, import, this->id, tid, day, month, year);
+		Transaction t = Transaction(type, import, this->id, tid, d);
 
 		this->balance = this->balance - import;
 
@@ -82,7 +82,7 @@ void Conto::insertTransaction(Type type, int tid, float import, int day, int mon
 	else {
 		Transaction t;
 
-		t = Transaction(type, import, this->id, tid, day, month, year, account2->getId());
+		t = Transaction(type, import, this->id, tid,d, account2->getId());
 		this->transactions.push_back(t);
 		this->balance = this->balance - import;
 
@@ -93,14 +93,14 @@ void Conto::insertTransaction(Type type, int tid, float import, int day, int mon
 
 
 
-void Conto::modifyTrans(int tid, float import, int day, int month, int year, int* ar)
+void Conto::modifyTrans(int tid, float import, Date d, int* ar)
 {
 	ar[0] = 0;
 	ar[1] = 0;
 	list<Transaction>::iterator it;
 	for (it = this->transactions.begin(); it != this->transactions.end(); ++it) {
 		if (it->getTransactionId() == tid) {
-			it->setDate(year, month, day);
+			it->setDate(d);
 
 			float difference = it->getImport() - import;
 			if (it->getType()==Type::Gain) {

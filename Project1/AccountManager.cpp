@@ -78,18 +78,18 @@ void AccountManager::deleteAccount(int id)
 }
 
 
-void AccountManager::createTransaction(Type trans, int accountId, float importo, int day, int month, int year, int accountId2)
+void AccountManager::createTransaction(Type trans, int accountId, float importo, Date d, int accountId2)
 {
 	
 	int index = this->findAccountIndex(accountId);
 	if (accountId2 != 0 && Type::Transfer==trans) {
 		int index2 = this->findAccountIndex(accountId2);
-		this->accounts[index].insertTransaction(trans, this->transactionIdCounter, importo, day, month, year, &this->accounts[index2]);
+		this->accounts[index].insertTransaction(trans, this->transactionIdCounter, importo, d, &this->accounts[index2]);
 		this->incrementIdTransactionCounter();
 	}
 	else if (Type::Transfer != trans) {
 		int index2 = this->findAccountIndex(accountId2);
-		this->accounts[index].insertTransaction(trans, this->transactionIdCounter, importo, day, month, year);
+		this->accounts[index].insertTransaction(trans, this->transactionIdCounter, importo, d);
 		this->incrementIdTransactionCounter();
 	}
 	else {
@@ -99,7 +99,7 @@ void AccountManager::createTransaction(Type trans, int accountId, float importo,
 	saveOnFile(this->directory);
 }
 
-void AccountManager::modifyTransaction(int accountId, int tid, float import, int day, int month, int year)
+void AccountManager::modifyTransaction(int accountId, int tid, float import, Date d)
 {
 	int index = this->findAccountIndex(accountId);
 
@@ -108,7 +108,7 @@ void AccountManager::modifyTransaction(int accountId, int tid, float import, int
 	}
 	else {
 		int c2[2];
-		this->accounts[index].modifyTrans(tid, import, day, month, year, c2);
+		this->accounts[index].modifyTrans(tid, import, d, c2);
 		if (c2[0]!=0) {
 			int index2 = this->findAccountIndex(c2[0]);
 			if (index2 == -1) {
@@ -116,7 +116,7 @@ void AccountManager::modifyTransaction(int accountId, int tid, float import, int
 				cout << "Secondo conto non trovato. Probabilmente eliminato in precedenza" << endl;
 			}
 			else {
-				this->accounts[index2].modifyTrans(c2[1],import, day, month, year,c2);
+				this->accounts[index2].modifyTrans(c2[1],import, d,c2);
 			}
 		}
 	}

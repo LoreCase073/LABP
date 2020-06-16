@@ -44,7 +44,7 @@ private:
 
 public:
 	
-	Transaction(Type t, float i, int idFrom, int tid, int d, int m, int y, int aidTo = 0);
+	Transaction(Type t, float i, int idFrom, int tid, Date d, int aidTo = 0);
 	Transaction();
 	
 	Type getType();
@@ -59,7 +59,7 @@ public:
 
 	int getAccountIdTo();
 
-	void setDate(int y, int m, int d);
+	void setDate(Date d);
 
 	int getDay();
 
