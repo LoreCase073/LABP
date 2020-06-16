@@ -28,9 +28,7 @@
     <ClCompile Include="AccountManager.cpp" />
     <ClCompile Include="Conto.cpp" />
     <ClCompile Include="Date.cpp" />
-    <ClCompile Include="esempio1.cpp" />
-    <ClCompile Include="secondStart.cpp" />
-    <ClCompile Include="startProject.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Transaction.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

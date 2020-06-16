@@ -38,8 +38,9 @@
     <ClCompile Include="..\Project1\Date.cpp" />
     <ClCompile Include="..\Project1\Transaction.cpp" />
     <ClCompile Include="main_test.cpp" />
-    <ClCompile Include="test.cpp" />
+    <ClCompile Include="test_Conto.cpp" />
     <ClCompile Include="test_AccountManager.cpp" />
+    <ClCompile Include="test_Date.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Project1\Project1.vcxproj">

@@ -21,8 +21,9 @@ Transaction::Transaction(Type t, float i,int id, int tid, int d, int m, int y, i
 	this->date = Date(d, m, y);
 
 }
-Transaction::Transaction(){
-	this->date = Date(1, 1, 1900);
+
+Transaction::Transaction() {
+
 }
 
 Type Transaction::getType()

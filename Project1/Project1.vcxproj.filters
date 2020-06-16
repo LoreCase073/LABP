@@ -35,20 +35,14 @@
     <ClCompile Include="Transaction.cpp">
       <Filter>File di risorse</Filter>
     </ClCompile>
-    <ClCompile Include="startProject.cpp">
-      <Filter>File di origine</Filter>
-    </ClCompile>
-    <ClCompile Include="secondStart.cpp">
-      <Filter>File di origine</Filter>
-    </ClCompile>
-    <ClCompile Include="esempio1.cpp">
-      <Filter>File di origine</Filter>
-    </ClCompile>
     <ClCompile Include="AccountManager.cpp">
       <Filter>File di risorse</Filter>
     </ClCompile>
     <ClCompile Include="Date.cpp">
       <Filter>File di risorse</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

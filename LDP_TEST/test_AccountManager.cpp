@@ -60,6 +60,12 @@ TEST_F(AccountManagerTest, DeleteAccounts) {
     ASSERT_EQ(1, ac.getNumberOfAccounts());
 }
 
+
+TEST_F(AccountManagerTest, DeleteWrongAccount) {
+    //test cancellazione di un account e test se numero account è sbagliato
+    EXPECT_THROW(ac.deleteAccount(5), range_error);
+}
+
 TEST_F(AccountManagerTest, InsertTransactionGainExpense) {
     //test inserimento di transazioni gain ed expense
     ac.createTransaction(Type::Gain, 1, 500.5, 27,05,2020);

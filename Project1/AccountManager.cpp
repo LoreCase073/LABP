@@ -72,7 +72,7 @@ void AccountManager::deleteAccount(int id)
 
 	}
 	else {
-		throw "Account non trovato!";
+		throw range_error("Account non trovato!");
 	}
 	saveOnFile(this->directory);
 }
@@ -104,7 +104,7 @@ void AccountManager::modifyTransaction(int accountId, int tid, float import, int
 	int index = this->findAccountIndex(accountId);
 
 	if (index == -1) {
-		throw "Account non trovato!";
+		throw range_error("Account non trovato!");
 	}
 	else {
 		int c2[2];
@@ -128,7 +128,7 @@ void AccountManager::eraseTransaction(int aid, int tid)
 	int index = this->findAccountIndex(aid);
 
 	if (index == -1) {
-		throw "Account non trovato!";
+		throw range_error("Account non trovato!");
 	}
 	else {
 		int c2[2];
@@ -144,7 +144,7 @@ void AccountManager::eraseTransaction(int aid, int tid)
 			}
 		}
 		else if (c2[0] == -1) {
-			throw "Transazione non trovata!";
+			throw range_error("Transazione non trovata!");
 		}
 	}
 	saveOnFile(this->directory);
@@ -170,7 +170,7 @@ float AccountManager::getAccountBalance(int id)
 {
 	int index = this->findAccountIndex(id);
 	if (index == -1) {
-		throw "Account non trovato!";
+		throw range_error("Account non trovato!");
 	}
 	else
 		return this->accounts[index].getBalance();
@@ -181,7 +181,7 @@ string AccountManager::getAccountName(int id)
 {
 	int index = this->findAccountIndex(id);
 	if (index == -1) {
-		throw "Account non trovato!";
+		throw range_error("Account non trovato!");
 	}
 	else
 		return this->accounts[index].getAccountName();
@@ -191,7 +191,7 @@ string AccountManager::getAccountUser(int id)
 {
 	int index = this->findAccountIndex(id);
 	if (index == -1) {
-		throw "Account non trovato!";
+		throw range_error("Account non trovato!");
 	}
 	else
 		return this->accounts[index].getUser();
@@ -219,7 +219,7 @@ void AccountManager::visualizeTransactions(int d)
 {
 	int index = this->findAccountIndex(d);
 	if (index == -1) {
-		throw "Account non trovato!";
+		throw range_error("Account non trovato!");
 		
 	}
 	else {
